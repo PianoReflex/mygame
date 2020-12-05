@@ -3,3 +3,5 @@ December 2nd, 2020 at 5:59 pm: Added window, debugging window size. Imported all
 December 2nd, 2020 at 6:08 pm: Figured out my dumb mistake. All errors fixed, window initialised.
 
 December 3rd, 2020, at 12:27 pm: Added player model, background graphics fixed.
+
+December 4th, 2020, at 8:14 pm: Better graphics, movement, and background map design. Still need to fix one movement bug. 
