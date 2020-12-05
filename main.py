@@ -1,7 +1,6 @@
 import tkinter
-
-# import math
-# import PIL
+import math
+from PIL import ImageTk, Image
 
 # initialize our window to display graphics
 window = tkinter.Tk()
@@ -14,10 +13,10 @@ c = tkinter.Canvas(window, height=int(HEIGHT / 2), width=int(WIDTH / 2),
                    highlightthickness=0)
 c.pack()  # put the canvas widget inside our window
 for i in range(0, HEIGHT, 10):
-    c.create_line(i, 0, i, WIDTH)
+    c.create_line(i, 0, i, WIDTH, fill = "light grey")
 
 for i in range(0, WIDTH, 10):
-    c.create_line(0, i, HEIGHT, i)
+    c.create_line(0, i, HEIGHT, i, fill = "light grey")
 
 
 class Player:
@@ -31,34 +30,76 @@ class Player:
         self.movement_speed = movement_speed
         self.color = color
 
-    def spawn(self, coords):
-        self.player2 = c.create_oval(coords, fill=self.color, outline=self.color)
-        self.player_gun = c.create_rectangle(coords[2] / 2, coords[3] / 1.4, (coords[2] / 2) + 2.5 * (coords[3] / 2),
-                                        (coords[1] / 2) + 0.5 * (coords[1] / 0.25), fill="grey", outline="grey")
-        print(coords[0] / 2, coords[1] / 2)
+    def spawn(self, coords, movement):
+        p = Image.open("tank.png")
+        p2 = ImageTk.PhotoImage(p)
+        player2 = c.create_image(coords[0], coords[1], image = p2)
+        p2.image = p2
 
-    def movement(self, event = "<Key>"):
+        self.movement = movement
+    def movement2(self, event="<Key>"):
         key = event.keysym
         if key == "Right":
-            c.move(self.player2, 1, 0)
-            c.move(self.player_gun, 1, 0)
+            c.delete("all")
+            for i in range(0, HEIGHT, 10):
+                c.create_line(i, 0, i, WIDTH, fill = "light grey")
+
+            for i in range(0, WIDTH, 10):
+                c.create_line(0, i, HEIGHT, i, fill = "light grey")
+            self.coords[0] += 3
+            p = Image.open("tank.png")
+            p2 = ImageTk.PhotoImage(p)
+            p2.image = p2
+            player2 = c.create_image(self.coords[0], self.coords[1], image=p2)
+
         elif key == "Left":
-            c.move(self.player2, -1, 0)
-            c.move(self.player_gun, -1, 0)
+            c.delete("all")
+            for i in range(0, HEIGHT, 10):
+                c.create_line(i, 0, i, WIDTH, fill="light grey")
+
+            for i in range(0, WIDTH, 10):
+                c.create_line(0, i, HEIGHT, i, fill="light grey")
+            self.coords[0] -= 3
+            p = Image.open("tank.png")
+            p2 = ImageTk.PhotoImage(p)
+            p2.image = p2
+            player2 = c.create_image(self.coords[0], self.coords[1], image=p2)
         elif key == "Up":
-            c.move(self.player2, 0, -1)
-            c.move(self.player_gun, 0, -1)
+            c.delete("all")
+            for i in range(0, HEIGHT, 10):
+                c.create_line(i, 0, i, WIDTH, fill="light grey")
+
+            for i in range(0, WIDTH, 10):
+                c.create_line(0, i, HEIGHT, i, fill="light grey")
+            self.coords[1] -= 3
+            p = Image.open("tank.png")
+            p2 = ImageTk.PhotoImage(p)
+            p2.image = p2
+            player2 = c.create_image(self.coords[0], self.coords[1], image=p2)
         elif key == "Down":
-            c.move(self.player2, 0, 1)
-            c.move(self.player_gun, 0, 1)
+            c.delete("all")
+            for i in range(0, HEIGHT, 10):
+                c.create_line(i, 0, i, WIDTH, fill="light grey")
+
+            for i in range(0, WIDTH, 10):
+                c.create_line(0, i, HEIGHT, i, fill="light grey")
+            self.coords[1] += 3
+            p = Image.open("tank.png")
+            p2 = ImageTk.PhotoImage(p)
+            p2.image = p2
+            player2 = c.create_image(self.coords[0], self.coords[1], image=p2)
 
 
+def mouse_movement(event):
+    x, y = event.x, event.y
 
-player = Player(10, (0, 10, 50, 50), "blue")
-player.spawn((0, 10, 50, 60))
+player = Player(10, [0, 10, 50, 50], "blue")
+player.spawn([0, 10, 50, 80], 3)
+
+
 def main_game_loop():
-    c.bind_all("<Key>", player.movement)
-    window.after(60, lambda: main_game_loop())
+    c.bind_all("<Key>", player.movement2)
+    window.after(500, lambda: main_game_loop())
 
 
 main_game_loop()
