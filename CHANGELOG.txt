@@ -5,3 +5,5 @@ December 2nd, 2020 at 6:08 pm: Figured out my dumb mistake. All errors fixed, wi
 December 3rd, 2020, at 12:27 pm: Added player model, background graphics fixed.
 
 December 4th, 2020, at 8:14 pm: Better graphics, movement, and background map design. Still need to fix one movement bug. 
+
+December 7th, 2020, at 10:33 am: Added better camera movement, trying to fix a bug but otherwise good so far. Better player graphics as well. 
