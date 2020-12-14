@@ -11,7 +11,7 @@ window.geometry("{1}x{0}".format(int(HEIGHT / 2), int(WIDTH / 2)))
 
 c = tkinter.Canvas(window, height=HEIGHT * 2, width=WIDTH * 2,
                    highlightthickness=0)
-c.place(x=WIDTH/2 + (WIDTH/4), y=HEIGHT/2, anchor="center")  # put the canvas widget inside our window
+c.place(x=WIDTH / 2 + (WIDTH / 4), y=HEIGHT / 2, anchor="center")  # put the canvas widget inside our window
 window.wm_attributes("-transparentcolor", "white")
 for i in range(0, HEIGHT, 10):
     c.create_line(i, 0, i, WIDTH, fill="light grey")
@@ -37,18 +37,18 @@ class Player:
         p2.image = p2
 
         self.movement = movement
-        self.canv_coord_x = WIDTH/2 + (WIDTH/4)
-        self.canv_coord_y = HEIGHT/2
+        self.canv_coord_x = WIDTH / 2 + (WIDTH / 4)
+        self.canv_coord_y = HEIGHT / 2
         self.player_coord_x = coords[0]
         self.player_coord_y = coords[1]
         self.move = move
 
-        c.place(x = WIDTH/2 + (WIDTH/4), y = HEIGHT/2, anchor = "center")
+        c.place(x=WIDTH / 2 + (WIDTH / 4), y=HEIGHT / 2, anchor="center")
         player2 = c.create_image(coords[0], coords[1], image=p2)
 
     def movement2(self, event="<Key>"):
         key = event.keysym
-        if key == "Right":
+        if key == "Right" or key == "d":
             c.delete("all")
             for i in range(0, HEIGHT, 10):
                 c.create_line(i, 0, i, WIDTH, fill="light grey")
@@ -63,7 +63,7 @@ class Player:
             c.place(x=self.canv_coord_x, y=self.canv_coord_y, anchor="center")
             player2 = c.create_image(self.coords[0], self.coords[1], image=p2)
 
-        elif key == "Left":
+        elif key == "Left" or key == "a":
             c.delete("all")
             for i in range(0, HEIGHT, 10):
                 c.create_line(i, 0, i, WIDTH, fill="light grey")
@@ -77,7 +77,7 @@ class Player:
             self.coords[0] -= self.move
             c.place(x=self.canv_coord_x, y=self.canv_coord_y, anchor="center")
             player2 = c.create_image(self.coords[0], self.coords[1], image=p2)
-        elif key == "Up":
+        elif key == "Up" or key == "w":
             c.delete("all")
             for i in range(0, HEIGHT, 10):
                 c.create_line(i, 0, i, WIDTH, fill="light grey")
@@ -91,7 +91,7 @@ class Player:
             self.coords[1] -= self.move
             c.place(x=self.canv_coord_x, y=self.canv_coord_y, anchor="center")
             player2 = c.create_image(self.coords[0], self.coords[1], image=p2)
-        elif key == "Down":
+        elif key == "Down" or key == "s":
             c.delete("all")
             for i in range(0, HEIGHT, 10):
                 c.create_line(i, 0, i, WIDTH, fill="light grey")
@@ -104,15 +104,15 @@ class Player:
             self.canv_coord_y -= self.move
             self.coords[1] += self.move
             c.place(x=self.canv_coord_x, y=self.canv_coord_y, anchor="center")
-            player2 = c.create_image(self.coords[0], self.coords[1], image = p2)
+            player2 = c.create_image(self.coords[0], self.coords[1], image=p2)
 
 
 def mouse_movement(event):
     x, y = event.x, event.y
 
 
-player = Player(10, [WIDTH/2, HEIGHT/2 + (HEIGHT/4)], "blue")
-player.spawn([WIDTH/2, HEIGHT/2 + (HEIGHT/4)], 3, WIDTH/2, HEIGHT/2, 3)
+player = Player(10, [WIDTH / 2, HEIGHT / 2 + (HEIGHT / 4)], "blue")
+player.spawn([WIDTH / 2, HEIGHT / 2 + (HEIGHT / 4)], 3, WIDTH / 2, HEIGHT / 2, 3)
 
 
 def main_game_loop():
